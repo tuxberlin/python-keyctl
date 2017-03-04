@@ -30,4 +30,13 @@ setup(
             'keyctlgui=keyctl.gui:main',
         ],
     },
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Environment :: X11 Applications :: Qt',
+        'Topic :: Utilities',
+    ]
 )
