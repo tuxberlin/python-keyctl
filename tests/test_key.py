@@ -30,7 +30,7 @@ def empty_keyring():
 # -------------------------------------------------------------------
 
 
-class TestKey:
+class TestKey(object):
     def test_init(self, empty_keyring):
         # empty
         k = Key()
@@ -60,19 +60,20 @@ class TestKey:
 
         # 3 keys
         keysrc = [
-            ['test key 1', 'content 111'],
-            ['test key 2', 'content 222'],
-            ['test key 3', 'content 333'],
+            {'name': 'test key 1', 'data': 'content 111'},
+            {'name': 'test key 2', 'data': 'content 222'},
+            {'name': 'test key 3', 'data': 'content 333'},
         ]
         for src in keysrc:
-            src.append(keyctl.add_key(src[0], src[1]))
+            src['id'] = keyctl.add_key(src['name'], src['data'])
 
         keylist = Key.list()
         assert len(keylist) == 3
-        for i in range(0, 3):
-            assert keylist[i].id == keysrc[i][2]
-            assert keylist[i].name == keysrc[i][0]
-            assert keylist[i].data == keysrc[i][1]
+        for key in keylist:
+            src = next((x for x in keysrc if x['id'] == key.id), None)
+            assert key.id == src['id']
+            assert key.name == src['name']
+            assert key.data == src['data']
 
     # ---------------------------------------------------------------
 
@@ -152,8 +153,6 @@ class TestKey:
         k1.delete()
         with pytest.raises(KeyNotExistError):
             k2.update('xxxx')
-
-
 
 
 # -------------------------------------------------------------------

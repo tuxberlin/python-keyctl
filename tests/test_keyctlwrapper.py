@@ -29,7 +29,7 @@ def empty_keyring():
 # -------------------------------------------------------------------
 
 
-class TestKeyctlWrapper:
+class TestKeyctlWrapper(object):
     def test_get_all_key_ids(self, empty_keyring):
         keyctl = empty_keyring
 
@@ -38,8 +38,7 @@ class TestKeyctlWrapper:
         assert len(keys) == 0
 
         # 1 key
-        keyids = []
-        keyids.append(keyctl.add_key('test1', 'abc'))
+        keyids = [keyctl.add_key('test1', 'abc')]
 
         keys = keyctl.get_all_key_ids()
         assert len(keys) == 1
@@ -52,7 +51,6 @@ class TestKeyctlWrapper:
         assert len(keys) == 2
         assert keys[0] in keyids
         assert keys[1] in keyids
-
 
     # ---------------------------------------------------------------
 
