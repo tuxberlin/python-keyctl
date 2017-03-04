@@ -13,7 +13,7 @@ readme = readme.replace('\r', '')
 
 setup(
     name='keyctl',
-    version='0.1',
+    version='0.2',
     description='Wrapper to use keyctl command in Python',
     long_description=readme,
     author='Martin Becker',

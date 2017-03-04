@@ -11,6 +11,11 @@ build:
 pypi: clean build
 	twine upload dist/* -r testpypi
 
+pypi-real: clean build
+	@read -r -p "Are you sure? " INPUT; \
+	if [ "$$INPUT" != "y" ] ; then exit 1 ; fi
+	twine upload dist/*
+
 clean:
 	find . -type f -name '*~' -delete
 	find . -type f -name '*.o' -delete
