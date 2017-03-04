@@ -8,9 +8,8 @@ install:
   # pyside
   - sudo apt-get install -y qt4-qmake libqt4-dev
   - sudo apt-get install -y python-qt4 python-pyside
-
-#pip install pyside --find-links wheelhouse/
-#pip install PySide --no-index --find-links https://parkin.github.io/python-wheelhouse/;
+  # keyutils
+  - sudo apt-get install -y keyutils
 
 # run tests
 script:
