@@ -18,7 +18,7 @@ except ImportError:
 
 setup(
     name='keyctl',
-    version='0.3',
+    version='0.4',
     description='Wrapper to use keyctl command in Python',
     long_description=readme,
     author='Martin Becker',
