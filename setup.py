@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pypandoc
 from setuptools import setup
 
 
-here = os.path.abspath(os.path.dirname(__file__))
-readmefile = os.path.join(here, 'README.md')
-readme = pypandoc.convert(readmefile, 'rst', encoding='utf-8')
-readme = readme.replace('\r', '')
+try:
+    import pypandoc
+
+    here = os.path.abspath(os.path.dirname(__file__))
+    readmefile = os.path.join(here, 'README.md')
+    readme = pypandoc.convert(readmefile, 'rst', encoding='utf-8')
+    readme = readme.replace('\r', '')
+except ImportError:
+    readme = 'see README.md'
+    print 'NO README CREATED'
 
 
 setup(
@@ -24,7 +29,7 @@ setup(
     package_data={
         'keyctl.gui': ['addkey.ui', 'keylist.ui'],
     },
-    install_requires=['PySide'],
+    install_requires=[],
     entry_points={
         'console_scripts': [
             'keyctlgui=keyctl.gui:main',

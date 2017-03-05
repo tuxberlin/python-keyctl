@@ -76,14 +76,34 @@ For the GUI you also need:
 
 Qt4
 ```
-google it for your distribution
+$ sudo apt-get install qt4-qmake libqt4-core libqt4-dev
+$ qmake-qt4 --version
+QMake version 2.01a
+Using Qt version 4.8.1 in /usr/lib/x86_64-linux-gnu
 ```
 
 PySide
 ```
-$ pip install pyside
-$ pip show pyside | grep Version
-Version: 1.2.4
+$ sudo apt-get install python-qt4 python-pyside
+$ python -c "import PySide; print PySide.__version__"
+Version: 1.1.0
+```
+
+Virtualenv:  
+If you want to use this module in a virtualenv you either have to
+`(venv)$ pip install pyside` (which takes up to 40min to compile)
+or you can link your pyside distro package into your virtualenv like this:
+```
+$ cd myprojectfolder
+$ ln -s /usr/lib/python2.7/dist-packages/PySide/ venv/lib/python2.7/site-packages/
+```
+
+try it:
+```
+$ cd myprojectfolder
+$ source venv/bin/activate
+(venv)$ python -c "import PySide; import os; print PySide.__version__, os.path.realpath(PySide.__path__[0])"
+1.1.0 /usr/lib/python2.7/dist-packages/PySide
 ```
 
 

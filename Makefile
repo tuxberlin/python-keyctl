@@ -5,6 +5,7 @@ test:
 	pytest tests
 
 build:
+	bash make-readme-toc.sh
 	python setup.py sdist
 	python setup.py bdist_wheel
 
