@@ -171,6 +171,9 @@ To open the GUI, run the installed command.
 $ keyctlgui
 ```
 
+![GUI Screenshot](https://github.com/tuxberlin/python-keyctl/wiki/images/screenshot.jpg)
+
+
 
 ## Development
 
