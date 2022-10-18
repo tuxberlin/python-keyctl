@@ -1,6 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
+from typing import List
 from .keyctlwrapper import KeyctlWrapper
 
 
@@ -22,7 +23,7 @@ class Key(object):
     # ---------------------------------------------------------------
 
     @staticmethod
-    def _init_keyctl(keyring=None, keytype=None):
+    def _init_keyctl(keyring=None, keytype=None) -> KeyctlWrapper:
         if keyring is not None and keytype is not None:
             keyctl = KeyctlWrapper(keyring=keyring, keytype=keytype)
         elif keyring is not None:
@@ -45,7 +46,7 @@ class Key(object):
     # ---------------------------------------------------------------
 
     @classmethod
-    def list(cls, keyring=None, keytype=None):
+    def list(cls, keyring=None, keytype=None) -> List["Key"]:
         keyctl = cls._init_keyctl(keyring, keytype)
         keyids = keyctl.get_all_key_ids()
 
@@ -59,7 +60,7 @@ class Key(object):
     # ---------------------------------------------------------------
 
     @classmethod
-    def search(cls, name, keyring=None, keytype=None):
+    def search(cls, name, keyring=None, keytype=None) -> "Key":
         key = cls(keyring, keytype)
 
         key.id = key._keyctl.get_id_from_name(name)
@@ -72,7 +73,7 @@ class Key(object):
     # ---------------------------------------------------------------
 
     @classmethod
-    def add(cls, name, data, keyring=None, keytype=None):
+    def add(cls, name, data, keyring=None, keytype=None) -> "Key":
         keyctl = cls._init_keyctl(keyring, keytype)
 
         keyid = keyctl.add_key(name, data)
