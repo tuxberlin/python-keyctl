@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
-from keyctlwrapper import KeyctlWrapper
+from .keyctlwrapper import KeyctlWrapper
 
 
 # -------------------------------------------------------------------

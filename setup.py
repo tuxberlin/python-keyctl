@@ -13,7 +13,7 @@ try:
     readme = readme.replace('\r', '')
 except ImportError:
     readme = 'see README.md'
-    print 'NO README CREATED'
+    print('NO README CREATED')
 
 
 setup(
@@ -40,7 +40,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.9',
         'Environment :: X11 Applications :: Qt',
         'Topic :: Utilities',
     ]

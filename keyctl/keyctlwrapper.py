@@ -50,21 +50,23 @@ class KeyctlWrapper(object):
     default_keyring = '@u'
     default_keytype = 'user'
 
-    def __init__(self, keyring=default_keyring, keytype=default_keytype):
+    def __init__(self, keyring: str=default_keyring, keytype: str=default_keytype):
         self.keyring = keyring
         self.keytype = keytype
 
     # ---------------------------------------------------------------
 
     @staticmethod
-    def _system(args, data=None, check=True):
+    def _system(args, data: str=None, check=True):
+
         try:
             p = subprocess.Popen(
                 args,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 stdin=subprocess.PIPE,
-                bufsize=4096
+                bufsize=4096,
+                text=True,
             )
         except OSError as e:
             raise OSError('Command \'{}\' execution failed. ErrMsg:{}'.format(' '.join(args), e))
@@ -78,7 +80,7 @@ class KeyctlWrapper(object):
 
         if not check:
             return ret, out, err
-        elif ret is 0:
+        elif ret == 0:
             return out
         else:
             raise KeyctlOperationError(errmsg='({}){} {}'.format(ret, err, out))
