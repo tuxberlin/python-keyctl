@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import subprocess
+from typing import List
 
 
 # -------------------------------------------------------------------
@@ -50,21 +51,23 @@ class KeyctlWrapper(object):
     default_keyring = '@u'
     default_keytype = 'user'
 
-    def __init__(self, keyring=default_keyring, keytype=default_keytype):
+    def __init__(self, keyring: str=default_keyring, keytype: str=default_keytype):
         self.keyring = keyring
         self.keytype = keytype
 
     # ---------------------------------------------------------------
 
     @staticmethod
-    def _system(args, data=None, check=True):
+    def _system(args, data: str=None, check=True):
+
         try:
             p = subprocess.Popen(
                 args,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 stdin=subprocess.PIPE,
-                bufsize=4096
+                bufsize=4096,
+                text=True,
             )
         except OSError as e:
             raise OSError('Command \'{}\' execution failed. ErrMsg:{}'.format(' '.join(args), e))
@@ -78,14 +81,14 @@ class KeyctlWrapper(object):
 
         if not check:
             return ret, out, err
-        elif ret is 0:
+        elif ret == 0:
             return out
         else:
             raise KeyctlOperationError(errmsg='({}){} {}'.format(ret, err, out))
 
     # ---------------------------------------------------------------
 
-    def get_all_key_ids(self):
+    def get_all_key_ids(self) -> List[int]:
         out = self._system(['keyctl', 'rlist', self.keyring])
         l = out.split()
         l = [int(x) for x in l]
@@ -93,7 +96,7 @@ class KeyctlWrapper(object):
 
     # ---------------------------------------------------------------
 
-    def get_id_from_name(self, name):
+    def get_id_from_name(self, name: str) -> int:
         # ret, out, err = self._system(['keyctl', 'request', self.keytype, name], check=False)
         ret, out, err = self._system(['keyctl', 'search', self.keyring, self.keytype, name], check=False)
 
@@ -106,7 +109,7 @@ class KeyctlWrapper(object):
 
     # ---------------------------------------------------------------
 
-    def get_name_from_id(self, keyid):
+    def get_name_from_id(self, keyid: int) -> str:
         ret, out, err = self._system(['keyctl', 'rdescribe', str(keyid)], check=False)
 
         if ret != 0:
@@ -118,7 +121,7 @@ class KeyctlWrapper(object):
 
     # ---------------------------------------------------------------
 
-    def get_data_from_id(self, keyid, mode='raw'):
+    def get_data_from_id(self, keyid: int, mode='raw'):
         if mode.lower() == 'raw':
             kmode = 'pipe'
         elif mode.lower() == 'hex':
@@ -141,7 +144,7 @@ class KeyctlWrapper(object):
 
     # ---------------------------------------------------------------
 
-    def add_key(self, name, data):
+    def add_key(self, name: str, data) -> int:
         try:
             keyid = self.get_id_from_name(name)
             raise KeyAlreadyExistError(keyid=keyid, keyname=name)
@@ -155,7 +158,7 @@ class KeyctlWrapper(object):
 
     # ---------------------------------------------------------------
 
-    def update_key(self, keyid, data):
+    def update_key(self, keyid: int, data):
         ret, out, err = self._system(['keyctl', 'pupdate', str(keyid)], data, check=False)
 
         if ret == 1:
@@ -165,7 +168,7 @@ class KeyctlWrapper(object):
 
     # ---------------------------------------------------------------
 
-    def remove_key(self, keyid):
+    def remove_key(self, keyid: int):
         # revoke first, because unlinking is slow
         ret, out, err = self._system(['keyctl', 'revoke', str(keyid)], check=False)
         if ret == 1:

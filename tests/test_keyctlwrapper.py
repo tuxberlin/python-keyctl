@@ -111,7 +111,7 @@ class TestKeyctlWrapper(object):
 
         # hex mode
         data = keyctl.get_data_from_id(keyid, 'hEx')
-        assert data == content.encode('hex')
+        assert data == content.encode("utf8").hex()
 
     # ---------------------------------------------------------------
 
