@@ -6,32 +6,26 @@
 [![License](https://img.shields.io/github/license/tuxberlin/python-keyctl.svg)](https://raw.githubusercontent.com/tuxberlin/python-keyctl/master/LICENSE)
 
 
-# python-keyctl
+<h1>python-keyctl</h1>
 
 Basic management of keys in the Linux kernel keyring in Python. Also comes with a small gui.
 
-
-## Table of contents
-
-[//]: # (AUTO TOC BEGIN)
-
-  * [Description](#description)
-  * [Requirements](#requirements)
-  * [Installation](#installation)
-  * [Usage](#usage)
-    * [Module](#module)
-    * [GUI](#gui)
-  * [Development](#development)
-    * [Warning](#warning)
-  * [Similar projects](#similar-projects)
-  * [License](#license)
-
-[//]: # (AUTO TOC END)
+* [Description](#description)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Module](#module)
+  * [GUI](#gui)
+* [Development](#development)
+  * [Warning](#warning)
+* [Similar projects](#similar-projects)
+* [License](#license)
 
 
-## Description
+# Description
 
-This is a small library to make use of some functions of the kernel keyring in Python. You can read, add and delete keys.
+This is a small library to make use of some functions of the kernel keyring in Python.
+You can read, add and delete keys.
 
 It simply uses the keyctl command (invoking it via subprocess), so this util must be installed.
 
@@ -46,30 +40,32 @@ Available functions:
  * **search/request** *(search for a key by name)*
  * **clear** *(remove all keys from keyring)*
 
-There are many more functions with keys in the kernel keyring (e.g. permissions) that is needed for proper keymanagement. But for my usecase I just needed the given simple functionality. 
+There are many more functions with keys in the kernel keyring (e.g. permissions)
+that is needed for proper keymanagement. But for my usecase I just needed the
+given simple functionality. 
 
 
-## Requirements
+# Requirements
 
-Python 2.7
+Python 3.9
 ```
-$ sudo apt-get install python2.7
+$ sudo apt install python3.9
 $ python --version
-Python 2.7.3
+Python 3.9.12
 ```
 
 pip
 ```
-$ sudo apt-get install python-pip
+$ sudo apt install python3-pip
 $ pip --version
-pip 9.0.1 from .... (python 2.7)
+pip 22.3.1 from .... (python 3.9)
 ```
 
 The 'keyctl' command
 ```
-$ sudo apt-get install keyutils
+$ sudo apt install keyutils
 $ dpkg -s keyutils | grep Version
-Version: 1.5.2-2
+Version: 1.5.9
 ```
 
 For the GUI you also need:
@@ -90,7 +86,7 @@ Version: 1.1.0
 ```
 
 Virtualenv:  
-If you want to use this module in a virtualenv you either have to
+If you want to use gui part of this module in a virtualenv you either have to
 `(venv)$ pip install pyside` (which takes up to 40min to compile)
 or you can link your pyside distro package into your virtualenv like this:
 ```
@@ -107,7 +103,7 @@ $ source venv/bin/activate
 ```
 
 
-## Installation
+# Installation
 
 ```
 $ pip install keyctl
@@ -116,9 +112,9 @@ $ pip install keyctl
 Ready to use.
 
 
-## Usage
+# Usage
 
-### Module
+## Module
 Get all keys:
 ```python
 from keyctl import Key
@@ -165,7 +161,7 @@ mykey.update('new content')
 ```
 
 
-### GUI
+## GUI
 To open the GUI, run the installed command.
 ```
 $ keyctlgui
@@ -175,14 +171,15 @@ $ keyctlgui
 
 
 
-## Development
+# Development
 
-### Warning
+## Warning
 
-If you run the integrated tests, your user keyring will be cleared. Don't do this when you have active keys e.g. for encryption.
+If you run the integrated tests, your user keyring will be cleared.
+Don't do this when you have active keys e.g. for encryption.
 
 
-## Similar projects
+# Similar projects
 
 Similar projects you might want to checkout:
 
@@ -190,7 +187,7 @@ Similar projects you might want to checkout:
  * https://github.com/jdukes/pykeyctl (more complete, direct library wrapper)
 
 
-## License
+# License
 
 GPL-3.0  
 see [LICENSE](https://raw.githubusercontent.com/tuxberlin/python-keyctl/master/LICENSE) file
