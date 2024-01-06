@@ -5,21 +5,23 @@ test:
 	pytest tests
 
 build:
-	bash make-readme-toc.sh
-	python setup.py sdist
-	python setup.py bdist_wheel
+	python3 -m build
 
-pypi: clean build
-	twine upload dist/* -r testpypi
+pypi:
+	python3 -m twine upload --repository testpypi dist/*
+	python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps keyctl
 
-pypi-real: clean build
+pypi-real: clean init build
 	@read -r -p "Are you sure? " INPUT; \
 	if [ "$$INPUT" != "y" ] ; then exit 1 ; fi
 	twine upload dist/*
 
 clean:
+	pip freeze | xargs pip uninstall keyctl -y
+	#pip uninstall keyctl
 	find . -type f -name '*~' -delete
 	find . -type f -name '*.o' -delete
 	find . -type f -name '*.pyc' -delete
-	rm -rf build dist .cache *.egg-info tests/__pycache__
+	find . -type d -name '__pycache__' -delete
+	rm -rf build dist .cache *.egg-info .pytest_cache
 

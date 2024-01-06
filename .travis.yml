@@ -6,8 +6,8 @@ sudo: required
 # dependencies
 install:
   # pyside
-  - sudo apt-get install -y qt4-qmake libqt4-dev
-  - sudo apt-get install -y python-qt4 python-pyside
+  #- sudo apt-get install -y qt4-qmake libqt4-dev
+  #- sudo apt-get install -y python-qt4 python-pyside
   # keyutils
   - sudo apt-get install -y keyutils
 

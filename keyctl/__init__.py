@@ -16,5 +16,7 @@ import subprocess
 try:
     subprocess.check_output(['which', 'keyctl'])
 except subprocess.CalledProcessError:
-    raise OSError('The commandline util \'keyctl\' must be installed to use this module. ' +
-                  'Install it via \'apt-get install keyutils\'.')
+    raise OSError(
+        'The commandline util \'keyctl\' must be installed to use this module. ' +
+        'Install it via \'apt-get install keyutils\'.'
+    )

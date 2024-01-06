@@ -72,7 +72,7 @@ For the GUI you also need:
 
 Qt4
 ```
-$ sudo apt-get install qt4-qmake libqt4-core libqt4-dev
+$ sudo apt install qt4-qmake libqt4-core libqt4-dev
 $ qmake-qt4 --version
 QMake version 2.01a
 Using Qt version 4.8.1 in /usr/lib/x86_64-linux-gnu
@@ -80,9 +80,9 @@ Using Qt version 4.8.1 in /usr/lib/x86_64-linux-gnu
 
 PySide
 ```
-$ sudo apt-get install python-qt4 python-pyside
-$ python -c "import PySide; print PySide.__version__"
-Version: 1.1.0
+$ sudo apt install python-qt4 python3-pyside
+$ python3 -c "import PySide; print(PySide.__version__)"
+Version: 1.2.2
 ```
 
 Virtualenv:  
@@ -90,16 +90,7 @@ If you want to use gui part of this module in a virtualenv you either have to
 `(venv)$ pip install pyside` (which takes up to 40min to compile)
 or you can link your pyside distro package into your virtualenv like this:
 ```
-$ cd myprojectfolder
-$ ln -s /usr/lib/python2.7/dist-packages/PySide/ venv/lib/python2.7/site-packages/
-```
-
-try it:
-```
-$ cd myprojectfolder
-$ source venv/bin/activate
-(venv)$ python -c "import PySide; import os; print PySide.__version__, os.path.realpath(PySide.__path__[0])"
-1.1.0 /usr/lib/python2.7/dist-packages/PySide
+$ ln -s /usr/lib/python3/dist-packages/PySide venv/lib/python3.9/site-packages/
 ```
 
 
@@ -120,30 +111,30 @@ Get all keys:
 from keyctl import Key
 keylist = Key.list()
 for mykey in keylist:
-    print mykey.id
+    print(mykey.id)
 ```
 
 Read existing key:
 ```python
 from keyctl import Key
 mykey = Key(123)
-print mykey.name
-print mykey.data
-print mykey.data_hex
+print(mykey.name)
+print(mykey.data)
+print(mykey.data_hex)
 ```
 
 Find key by name:
 ```python
 from keyctl import Key
 mykey = Key.search('test key')
-print mykey.id
+print(mykey.id)
 ```
 
 Add key:
 ```python
 from keyctl import Key
 mykey = Key.add('test key', 'test content')
-print mykey.id
+print(mykey.id)
 ```
 
 Delete key:
@@ -181,7 +172,7 @@ Don't do this when you have active keys e.g. for encryption.
 
 # Similar projects
 
-Similar projects you might want to checkout:
+Similar projects you might want to check out:
 
  * https://github.com/sassoftware/python-keyutils (more complete, available in debian repo)
  * https://github.com/jdukes/pykeyctl (more complete, direct library wrapper)
