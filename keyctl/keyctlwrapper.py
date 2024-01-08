@@ -44,6 +44,13 @@ class KeyctlOperationError(KeyctlWrapperException):
         super(KeyctlOperationError, self).__init__(message)
 
 
+class KeyRevokedError(KeyctlWrapperException):
+    def __init__(self, message=None, keyid=None, keyname=None, errmsg=None):
+        if message is None:
+            message = 'Key {} has been revoked'.format(
+                self._getkeydesc(keyid, keyname)
+                )
+        super(KeyRevokedError, self).__init__(message)
 # -------------------------------------------------------------------
 
 
