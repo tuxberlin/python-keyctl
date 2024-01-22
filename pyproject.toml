@@ -7,7 +7,7 @@ keyctl = ["gui/*.ui"]
 
 [project]
 name = "keyctl"
-version = "0.5-rc3"
+version = "0.5"
 authors = [
     {name="Martin", email="tuxberlin@gmail.com"},
 ]
