@@ -1,6 +1,5 @@
 [//]: # (-*- coding: utf-8 -*-)
 
-[![Travis](https://img.shields.io/travis/tuxberlin/python-keyctl/master.svg)](https://travis-ci.org/tuxberlin/python-keyctl)
 [![PyPI Package version](https://img.shields.io/pypi/v/keyctl.svg)](https://pypi.python.org/pypi/keyctl)
 [![PyPI Python version](https://img.shields.io/pypi/pyversions/keyctl.svg)](https://pypi.python.org/pypi/keyctl)
 [![License](https://img.shields.io/github/license/tuxberlin/python-keyctl.svg)](https://raw.githubusercontent.com/tuxberlin/python-keyctl/master/LICENSE)
