@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 import subprocess
@@ -51,14 +50,14 @@ class KeyctlWrapper(object):
     default_keyring = '@u'
     default_keytype = 'user'
 
-    def __init__(self, keyring: str=default_keyring, keytype: str=default_keytype):
+    def __init__(self, keyring: str = default_keyring, keytype: str = default_keytype):
         self.keyring = keyring
         self.keytype = keytype
 
     # ---------------------------------------------------------------
 
     @staticmethod
-    def _system(args, data: str=None, check=True):
+    def _system(args, data: str = None, check=True):
 
         try:
             p = subprocess.Popen(
@@ -90,9 +89,7 @@ class KeyctlWrapper(object):
 
     def get_all_key_ids(self) -> List[int]:
         out = self._system(['keyctl', 'rlist', self.keyring])
-        l = out.split()
-        l = [int(x) for x in l]
-        return l
+        return [int(x) for x in out.split()]
 
     # ---------------------------------------------------------------
 
@@ -182,6 +179,5 @@ class KeyctlWrapper(object):
 
     def clear_keyring(self):
         self._system(['keyctl', 'clear', self.keyring])
-
 
 # -------------------------------------------------------------------
