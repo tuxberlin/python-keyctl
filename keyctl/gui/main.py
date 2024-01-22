@@ -2,15 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from PySide.QtGui import QApplication
+from PySide6.QtCore import Qt, QCoreApplication
+from PySide6.QtWidgets import QApplication
 
-from gui import KeyringApp
+from keyctl.gui._gui import KeyringApp
 
 
 # -------------------------------------------------------------------
 
 
 def main():
+    QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
+
     app = QApplication(sys.argv)
 
     window = KeyringApp()
@@ -18,7 +21,7 @@ def main():
     window.center_window()
     window.activateWindow()
 
-    ret = app.exec_()
+    ret = app.exec()
     sys.exit(ret)
 
 

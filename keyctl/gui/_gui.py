@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-from PySide.QtUiTools import QUiLoader
-from PySide.QtGui import QMainWindow, QDesktopWidget, QTableWidgetItem, QDialog
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtWidgets import QMainWindow, QTableWidgetItem, QDialog
+from PySide6.QtGui import QGuiApplication
 
 from keyctl import Key
 
@@ -42,7 +43,7 @@ class KeyringApp(QMainWindow):
         self._refresh_table()
 
     def center_window(self):
-        coords = QDesktopWidget().availableGeometry().center()
+        coords = QGuiApplication.primaryScreen().availableGeometry().center()
         fg = self.ui.frameGeometry()
         fg.moveCenter(coords)
         self.ui.move(fg.topLeft())
@@ -67,7 +68,7 @@ class KeyringApp(QMainWindow):
             name, content = dialog.get_input()
             Key.add(name, content)
         else:
-            print 'ERROR'
+            print('ERROR')
 
         self._refresh_table()
 

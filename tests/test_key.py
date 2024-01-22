@@ -1,11 +1,7 @@
-
 # -*- coding: utf-8 -*-
 
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import pytest
+
 from keyctl import KeyctlWrapper, KeyNotExistError, KeyAlreadyExistError, KeyctlOperationError
 from keyctl import Key
 
@@ -40,7 +36,7 @@ class TestKey(object):
 
         # non existing key
         with pytest.raises(KeyNotExistError):
-            k = Key(999)
+            Key(999)
 
         # exisitng key
         keyctl = empty_keyring
@@ -80,7 +76,7 @@ class TestKey(object):
     def test_search(self, empty_keyring):
         # non existing key
         with pytest.raises(KeyNotExistError):
-            k = Key.search('this key does not exist')
+            Key.search('this key does not exist')
 
         # existing key
         keyctl = empty_keyring
@@ -153,6 +149,5 @@ class TestKey(object):
         k1.delete()
         with pytest.raises(KeyNotExistError):
             k2.update('xxxx')
-
 
 # -------------------------------------------------------------------
