@@ -7,19 +7,19 @@ keyctl = ["gui/*.ui"]
 
 [project]
 name = "keyctl"
-version = "0.5rc1"
+version = "0.5-rc3"
 authors = [
     {name="Martin", email="tuxberlin@gmail.com"},
 ]
 description = "Wrapper to use keyctl command in Python"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.9"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.9",
     "Environment :: X11 Applications :: Qt",
     "Topic :: Utilities",
 ]
