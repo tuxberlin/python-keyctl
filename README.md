@@ -21,6 +21,7 @@ Basic management of keys in the Linux kernel keyring in Python. Also comes with 
 * [License](#license)
 
 
+
 # Description
 
 This is a small library to make use of some functions of the kernel keyring in Python.
@@ -41,56 +42,46 @@ Available functions:
 
 There are many more functions with keys in the kernel keyring (e.g. permissions)
 that is needed for proper keymanagement. But for my usecase I just needed the
-given simple functionality. 
+given simple functionality.
+
+:warning: You might need to link your keyrings (e.g. for the testcases using the default keyring)
+to have proper permissions.
+E.g.:
+```sh
+$ keyctl link @u @s
+```
 
 
 # Requirements
 
 Python 3.9
-```
+```sh
 $ sudo apt install python3.9
 $ python --version
-Python 3.9.12
+Python 3.9.18
 ```
 
 pip
-```
+```sh
 $ sudo apt install python3-pip
 $ pip --version
-pip 22.3.1 from .... (python 3.9)
+pip 23.3.2 from .... (python 3.9)
 ```
 
 The 'keyctl' command
-```
+```sh
 $ sudo apt install keyutils
 $ dpkg -s keyutils | grep Version
-Version: 1.5.9
+Version: 1.6.1
 ```
 
-For the GUI you also need:
-
-Qt4
+If you want to use the GUI, you also need PySide6
 ```
-$ sudo apt install qt4-qmake libqt4-core libqt4-dev
-$ qmake-qt4 --version
-QMake version 2.01a
-Using Qt version 4.8.1 in /usr/lib/x86_64-linux-gnu
+$ pip install pyside6
+$ python3 -c "import PySide6; print(PySide6.__version__)"
+6.6.1
 ```
 
-PySide
-```
-$ sudo apt install python-qt4 python3-pyside
-$ python3 -c "import PySide; print(PySide.__version__)"
-Version: 1.2.2
-```
-
-Virtualenv:  
-If you want to use gui part of this module in a virtualenv you either have to
-`(venv)$ pip install pyside` (which takes up to 40min to compile)
-or you can link your pyside distro package into your virtualenv like this:
-```
-$ ln -s /usr/lib/python3/dist-packages/PySide venv/lib/python3.9/site-packages/
-```
 
 
 # Installation
@@ -100,6 +91,7 @@ $ pip install keyctl
 ```
 
 Ready to use.
+
 
 
 # Usage
@@ -169,12 +161,14 @@ If you run the integrated tests, your user keyring will be cleared.
 Don't do this when you have active keys e.g. for encryption.
 
 
+
 # Similar projects
 
 Similar projects you might want to check out:
 
  * https://github.com/sassoftware/python-keyutils (more complete, available in debian repo)
  * https://github.com/jdukes/pykeyctl (more complete, direct library wrapper)
+
 
 
 # License

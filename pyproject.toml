@@ -2,6 +2,9 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.package-data]
+keyctl = ["gui/*.ui"]
+
 [project]
 name = "keyctl"
 version = "0.5rc1"
@@ -22,7 +25,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-gui = ["PyQt4"]
+gui = ["PySide6"]
 
 [project.gui-scripts]
 keyctlgui = "keyctl.gui:main"
