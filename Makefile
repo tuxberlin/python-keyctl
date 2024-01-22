@@ -12,10 +12,10 @@ pypi:
 	python3 -m twine upload --repository testpypi dist/*
 	python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps keyctl
 
-pypi-real: clean init test build
-	@read -r -p "Are you sure? " INPUT; \
+pypi-real:
+	@read -r -p "Are you sure to upload to real pypi? " INPUT; \
 	if [ "$$INPUT" != "y" ] ; then exit 1 ; fi
-	twine upload dist/*
+	python3 -m twine upload dist/*
 
 clean:
 	pip freeze | xargs pip uninstall keyctl -y
